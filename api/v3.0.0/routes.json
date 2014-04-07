@@ -2434,6 +2434,17 @@
             }
         },
 
+        "get-releases": {
+            "url": "/repos/:user/:repo/releases",
+            "method": "GET",
+            "params": {
+                "$user": null,
+                "$repo": null,
+                "$page": null,
+                "$per_page": null
+            }
+        },
+
         "get-download": {
             "url": "/repos/:user/:repo/downloads/:id",
             "method": "GET",

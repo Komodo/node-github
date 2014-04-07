@@ -1602,6 +1602,30 @@ var repos = module.exports = {
         });
     };
 
+    this.getReleases = function(msg, block, callback) {
+        var self = this;
+        this.client.httpSend(msg, block, function(err, res) {
+            if (err)
+                return self.sendError(err, null, msg, callback);
+
+            var ret;
+            try {
+                ret = res.data && JSON.parse(res.data);
+            }
+            catch (ex) {
+                if (callback)
+                    callback(new error.InternalServerError(ex.message), res);
+                return;
+            }
+
+            if (!ret)
+                ret = {};
+
+            if (callback)
+                callback(null, ret);
+        });
+    };
+
     /** section: github
      *  repos#getDownload(msg, callback) -> null
      *      - msg (Object): Object that contains the parameters and their values to be sent to the server.
